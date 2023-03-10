@@ -1,0 +1,58 @@
+import Logo from "../assets/images/logo.svg";
+import IconMenu from "../assets/images/icon-menu.svg";
+import IconMenuClose from "../assets/images/icon-menu-close.svg";
+import React, { useState } from "react";
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="w-full flex justify-between items-center">
+      <div>
+        <img src={Logo} className="w-10 md:w-auto" />
+      </div>
+      <nav className={`flex flex-col  md:flex-row md:items-center md:justify-end  text-neutral-dark-grayish-blue absolute md:static md:h-auto h-screen w-[60%] py-8 px-4 md:px-0 top-0 right-0 bg-neutral-off-white z-50 ${isOpen ? "block" : "hidden md:flex"}`}>
+        <div className="flex flex-col md:flex-row md:gap-x-8 gap-y-4">
+          <div className="flex justify-end">
+            <img src={IconMenuClose} className="w-10 relative md:hidden" onClick={handleClose} />
+          </div>
+
+          <a className="hover:text-primary-soft-red" href="#">
+            Home
+          </a>
+
+          <a className="hover:text-primary-soft-red" href="#">
+            New
+          </a>
+          <a className="hover:text-primary-soft-red" href="#">
+            Popular
+          </a>
+          <a className="hover:text-primary-soft-red" href="#">
+            Trending
+          </a>
+          <a className="hover:text-primary-soft-red" href="#">
+            Categories
+          </a>
+        </div>
+      </nav>
+
+      <img src={IconMenu} className="md:hidden" onClick={handleToggle} />
+      <div className={`fixed w-screen h-screen top-0 left-0 bg-black opacity-60 md:hidden ${isOpen ? "block" : "hidden"}`} onClick={handleClose} />
+
+    </div>
+  );
+};
+
+export default Navbar;
